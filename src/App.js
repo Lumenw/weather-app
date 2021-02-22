@@ -4,7 +4,7 @@ import "./App.css";
 export default function App() {
   return (
     <div className="App">
-      weather app
+      <h1>weather app</h1>
       <footer>
         This
         <a href="https://github.com/Lumenw/weather-app" target="_blank">
