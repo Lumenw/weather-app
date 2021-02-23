@@ -4,10 +4,17 @@ import axios from "axios";
 
 export default function Weather() {
   const [ready, setReady] = useState(false);
-  const [temperature, setTemperature] = useState(null);
+  const [weatherData, setWeatherData] = useState({});
   function handleResponse(response) {
     console.log(response.data);
-    setTemperature(response.data.main.temp);
+
+    setWeatherData({
+      temperature: response.data.main.temp,
+      humidity: response.data.main.humidity,
+      wind: response.data.wind.speed,
+      city: response.data.name,
+    });
+
     setReady(true);
   }
 
@@ -34,10 +41,10 @@ export default function Weather() {
           </div>
         </form>
 
-        <h1>New York</h1>
+        <h1>{weatherData.city}</h1>
         <ul>
           <li>wednesday 07.00</li>
-          <li>cloudy</li>
+          <li>{weatherData.description}</li>
         </ul>
         <div className="row mt-3">
           <div className="col-6">
@@ -48,17 +55,17 @@ export default function Weather() {
                 className="float-left"
               />
               <div className="float-left">
-                <span className="temperature">{temperature}</span>
+                <span className="temperature">
+                  {Math.round(weatherData.temperature)}
+                </span>
                 <span className="unit">°C</span>
               </div>
             </div>
           </div>
           <div className="col-6">
             <ul>
-              <li>Prejdlfjsdl 15 %</li>
-
-              <li>humifity</li>
-              <li>wind</li>
+              <li>humidity:{weatherData.humidity}%</li>
+              <li>wind:{weatherData.wind} km/h</li>
             </ul>
           </div>
         </div>
@@ -67,7 +74,7 @@ export default function Weather() {
   } else {
     const apiKey = "a2d23c0e6ab96db842af05b8f61557fb";
     let city = "New York";
-    let apiUrl = `api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
+    let apiUrl = `https:api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
     axios.get(apiUrl).then(handleResponse);
 
     return "loading....";
