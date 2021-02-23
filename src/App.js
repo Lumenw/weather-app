@@ -9,7 +9,11 @@ export default function App() {
         <Weather />
         <footer>
           This{" "}
-          <a href="https://github.com/Lumenw/weather-app" target="_blank">
+          <a
+            href="https://github.com/Lumenw/weather-app"
+            target="_blank"
+            rel="noreferrer"
+          >
             project
           </a>{" "}
           was coded by Rosa and is open sourced
